@@ -1,0 +1,53 @@
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Gruppen-Generator</title>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:700%7CRoboto:400,700,300&amp;subset=greek,cyrillic-ext,latin-ext,cyrillic,latin,vietnamese,greek-ext" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+        <script src="script.js"></script>
+		
+	<link rel=stylesheet type="text/css" href="style.css">
+	
+	</head>
+	<body>
+		<a href="https://www.oberschule-stade.de"><img src="logo.png", style="width: 600px; height: 337px; object-fit: scale-down; right: 5%; position: absolute;"></img>
+		</a>
+		<h1>Gruppen-Generator <i class="fas fa-users" style="color:grey"></i> </h1>
+        <h2>OBS Stade Bildungscampus Riensförde </h1>
+		
+        <label>Modus</label>
+		<select id="mode" style="margin-top: 1%; padding: 0.5%;" onchange="changeLabel()">
+			<option>Gruppengröße</option>
+			<option>Gruppenanzahl</option>
+		</select><br>
+		
+        <label id="label_mode">Gruppengröße</label>
+		<input type="number" id="number" min="1" value="2" style="margin-top: 1%; padding: 0.5%;">
+        <br>
+		
+		<label style="margin-top: 2%;">Datei mit Namensliste</label>
+		<input type="file" style="margin-top: 1%; padding: 0.5%;" cols="50" rows="20" id="names">
+        <br>
+
+		<button class="btn" onClick="generateGroups()">Gruppen generieren</button>
+        <br>
+        
+        <a onclick="window.location.href=this">Reload<i class="fas fa-redo" style="padding-left: 5px;"></i></a>
+		
+		<h1 id="groups_header", style="visibility:hidden">Gruppen</h3>
+		
+		
+		<table id="groups"></table> <br>
+
+        <span id="tn"></span><br>
+		<span id="tg"></span>
+    
+		
+	</body>
+</html>

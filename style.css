@@ -1,0 +1,57 @@
+h1,
+h2 {
+    font-family: "Quicksand";
+    color: rgb(107, 169, 70);
+}
+
+body {
+    font-family: "Roboto";
+    font-size: 14px;
+    margin: 5%;
+}
+
+.btn {
+    margin-top: 30pt;
+    margin-bottom: 17pt;
+    border: none;
+    padding: 0.7%;
+    font-size: 16px;
+    background-color: rgb(29, 79, 154);
+    color: white;
+    font-family: "Source Sans Pro";
+    border-radius: 5px;
+}
+
+label {
+    padding-right: 10px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#groups_header {
+    color: rgb(245, 187, 29);
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
