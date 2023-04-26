@@ -1,4 +1,4 @@
-function writeGroupstoHTML(groups) {
+function writeGroupsToHTML(groups) {
     const table = document.getElementById('groups');
     table.innerHTML = ''
     // Create a new row for the table header
@@ -24,15 +24,7 @@ function changeLabel() {
     document.getElementById('label_mode').innerHTML = mode;
 }
 
-function collectElementsForKey(data, key) {
-    var list = data.map(function (item) {
-        return item[key];
-    }).filter(function (value, index, self) {
-        return self.indexOf(value) === index;
-    });
-    return list;
-}
-function load_csv(file, callback) {
+function loadCSV(file, callback) {
     Papa.parse(file, {
         header: true,  // use first row as header row
         download: true,  // download file from server
@@ -43,8 +35,21 @@ function load_csv(file, callback) {
     })
 }
 
-function seperateGroups(results) {
+function writeNamesToTextArea(results) {
+    data = results.data;
+    dataDict = [];
+    data.forEach(row => {
+        dataDict = [...dataDict, row]
+    });
+    names = dataDict.map(x => x["Vorname"]);
+    one_name_per_line = names.join("\n");
+    document.getElementById('names').style.display = 'block';
+    document.getElementById('names_label').style.display = 'block';
+    document.getElementById('names').value = one_name_per_line;
 
+}
+
+function separateGroups(names) {
     var selectedStringToNum = {
         "Gruppengröße": 1,
         "Gruppenanzahl": 2
@@ -53,14 +58,7 @@ function seperateGroups(results) {
     var mode = document.getElementById('mode').value
     mode = selectedStringToNum[mode];
     var number = parseInt(document.getElementById('number').value);
-    console.log(number)
-    data = results.data
-    dataDict = []
-    data.forEach(row => {
-        dataDict = [...dataDict, row]
-    });
 
-    names = dataDict.map(x => x["Vorname"])
     numParticipants = names.length;
     document.getElementById('groups_header').style.visibility = 'visible'
     document.getElementById('tn').innerHTML = `<b>Anzahl Namen:</b> ${numParticipants}`;
@@ -70,20 +68,24 @@ function seperateGroups(results) {
     numberOfGroups = mode == 1 ? Math.floor(numParticipants / number) : number
     groupSize = mode == 1 ? number : Math.floor(numParticipants / number);
     groups = chunkArray(names, groupSize)
-    console.log(groups)
     document.getElementById('tg').innerHTML = `<b>Anzahl Gruppen:</b> ${groups.length}`;
-    writeGroupstoHTML(groups.map(group => group.join(", ")))
+    writeGroupsToHTML(groups.map(group => group.join(", ")))
     return dataDict
 }
 
+function loadNames() {
+    var file = document.getElementById('names_file').files[0];
+
+    // Read the CSV file and write the first names to a Textarea
+
+    loadCSV(file, writeNamesToTextArea);
+
+}
+
 function generateGroups() {
-    var file = document.getElementById('names').files[0];
-    console.log(file)
-
-    // read the CSV file
-
-    console.log(load_csv(file, seperateGroups))
-
+    var names = document.getElementById('names').value;
+    names = names.split("\n");
+    separateGroups(names);
 }
 
 /**
