@@ -133,11 +133,3 @@ function chunkArray(array, chunkSize) {
 
     return chunkedArray;
 }
-
-function count(array) {
-    counts = {}
-    array.forEach((el) => {
-        counts[el] = counts[el] ? (counts[el] + 1) : 1;
-    });
-    return counts
-}
