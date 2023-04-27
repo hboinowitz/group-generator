@@ -41,11 +41,22 @@ function writeNamesToTextArea(results) {
     data.forEach(row => {
         dataDict = [...dataDict, row]
     });
-    names = dataDict.map(x => x["Vorname"]);
-    one_name_per_line = names.join("\n");
+
+    firstNames = dataDict.map(x => x["Vorname"]);
+    duplicateNames = firstNames.filter(
+        (firstName, index) => 
+        index == firstNames.indexOf(firstName) & index != firstNames.lastIndexOf(firstName)
+    );
+    if (duplicateNames.length != 0) {
+        firstNames = dataDict.map(
+            x => duplicateNames.includes(x["Vorname"]) ?
+                `${x["Vorname"]} ${x["Nachname"]}` : x["Vorname"]
+        );
+    }
+    oneNamePerLine = firstNames.join("\n");
     document.getElementById('names').style.display = 'block';
     document.getElementById('names_label').style.display = 'block';
-    document.getElementById('names').value = one_name_per_line;
+    document.getElementById('names').value = oneNamePerLine;
 
 }
 
@@ -90,7 +101,7 @@ function generateGroups() {
 
 /**
  * Shuffles array in place.
- * @param {Array} a items The array containing the items.
+ * @param {Array} array items The array containing the items.
  */
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -121,4 +132,12 @@ function chunkArray(array, chunkSize) {
     }
 
     return chunkedArray;
+}
+
+function count(array) {
+    counts = {}
+    array.forEach((el) => {
+        counts[el] = counts[el] ? (counts[el] + 1) : 1;
+    });
+    return counts
 }
