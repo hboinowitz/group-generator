@@ -54,8 +54,6 @@ function writeNamesToTextArea(results) {
         );
     }
     oneNamePerLine = firstNames.join("\n");
-    document.getElementById('names').style.display = 'block';
-    document.getElementById('names_label').style.display = 'block';
     document.getElementById('names').value = oneNamePerLine;
 
 }
@@ -81,7 +79,6 @@ function separateGroups(names) {
     groups = chunkArray(names, groupSize)
     document.getElementById('tg').innerHTML = `<b>Anzahl Gruppen:</b> ${groups.length}`;
     writeGroupsToHTML(groups.map(group => group.join(", ")))
-    return dataDict
 }
 
 function loadNames() {
